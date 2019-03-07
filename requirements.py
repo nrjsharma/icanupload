@@ -1,0 +1,11 @@
+Django==2.0.4
+djangorestframework==3.8.2
+Faker==0.9.1
+Pillow==5.1.0
+python-dateutil==2.7.3
+pytz==2018.4
+selenium==3.141.0
+six==1.11.0
+text-unidecode==1.2
+urllib3==1.24.1
+virtualenv==16.2.0
