@@ -24,7 +24,7 @@
 
 	<!--Custom_CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/button.css' %}">
 </head>
 
 <body>
@@ -33,10 +33,13 @@
 
         {% include 'nav.html' %}
 
-        <div class="row">
-            <div class="col-md-12" style="text-align: center;%">
-                <h2>No matter where you go – take your files with you</h2>
-                <button type="button" class="btn btn-primary btn-lg">Upload</button>
+        <div class="row" id="upload_outer_div">
+            <div class="col-md-12" style="text-align: center;">
+                <h2 class="tagline">No matter where you go – <br>take your files with you</h2>
+                <div class="button2" id="upload_btn" onclick="opnefile()" >Upload</div>
+                <input type="file" name="file"  id="getFile" style="display: none" autocomplete=off onchange="StartUp(event)" multiple/>
+                <input type="hidden" id="Hiddate"  name="Hiddate"/>
+                <button style="display: none">upload</button>
             </div>
         </div>
 

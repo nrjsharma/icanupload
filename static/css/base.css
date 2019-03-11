@@ -1,35 +1,60 @@
 
 html {
-    background:url(../Images/background.jpg) no-repeat center fixed;
+    background: url(../Images/background.jpg) no-repeat center fixed;
     background-size: cover;
     width: 100%;
     height: 100%;
 }
-body
-{
-    background-color: #fff;
+
+body {
+    background: transparent;
     width: 100%;
-    max-width:40cm;
-    height:auto;
-    display:block;
+    max-width: 40cm;
+    height: auto;
+    display: block;
     margin: 0 auto;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-a
-{
+
+a {
     text-decoration: none;
     color: #0645ad;
 }
-a:hover
-{
-    text-decoration:underline;
+
+a:hover {
+    text-decoration: underline;
 }
+
 input:focus {
-    outline:none;
+    outline: none;
 }
+
 input:focus {
-    outline-style:ridge;
-    outline-width:1px;
-    outline-color:#60b0f4;
+    outline-style: ridge;
+    outline-width: 1px;
+    outline-color: #60b0f4;
+}
+
+.tagline {
+    /*        line-height: 2.10em;*/
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5em;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 1.09em;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    -webkit-font-smoothing: antialiased;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+#upload_outer_div {
+    margin-top: 28vh;
+}
+
+#upload_btn {
+    margin-top: 15px;
 }
