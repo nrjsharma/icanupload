@@ -1,6 +1,6 @@
 
 html {
-    background: url(../Images/background.jpg) no-repeat center fixed;
+    background: url(../../Images/background.jpg) no-repeat center fixed;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -57,4 +57,7 @@ input:focus {
 
 #upload_btn {
     margin-top: 15px;
+}
+#getFile{
+    display: none;
 }
