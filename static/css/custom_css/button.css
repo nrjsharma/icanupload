@@ -1,4 +1,4 @@
-.button2 {
+.button {
     background-color: #60b0f4;
     border: none;
     color: white;
@@ -16,7 +16,7 @@
     transition-duration: 0.4s;
 }
 
-.button2:hover {
+.button:hover {
      background-color: #ffba00;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
