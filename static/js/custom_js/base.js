@@ -7,6 +7,7 @@ function openFileChooser() {
 function startUploading() {
     $("#getFile").change(function () {
         var data = new FormData($('form')[1]);
+        data.append('csrfmiddlewaretoken', $.cookie("csrftoken"));
         var form_url = $('#form_upload').attr('action');
         var form_type = $('#form_upload').attr('method');
         $.ajax({
