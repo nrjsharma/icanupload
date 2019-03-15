@@ -1,11 +1,16 @@
-Django==2.0.4
-djangorestframework==3.8.2
-Faker==0.9.1
-Pillow==5.1.0
-python-dateutil==2.7.3
-pytz==2018.4
-selenium==3.141.0
-six==1.11.0
-text-unidecode==1.2
-urllib3==1.24.1
-virtualenv==16.2.0
+Django == 2.0.4
+djangorestframework == 3.8.2
+entrypoints == 0.3
+Faker == 0.9.1
+flake8 == 3.7.7
+mccabe == 0.6.1
+Pillow == 5.1.0
+pycodestyle == 2.5.0
+pyflakes == 2.1.1
+python-dateutil == 2.7.3
+pytz == 2018.4
+selenium == 3.141.0
+six == 1.11.0
+text-unidecode == 1.2
+urllib3 == 1.24.1
+virtualenv == 16.2.0

@@ -1,13 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 
 
-# Create your views here.
-from django.views.decorators.csrf import csrf_exempt
-
-
-@csrf_exempt
 def FileUpload(request):
 
     if request.method == 'POST' and request.FILES.get('file', False):
