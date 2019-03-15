@@ -10,8 +10,12 @@
                 <input type="file" name="file" id="getFile" autocomplete=off
                        multiple/>
                 <input type="hidden" id="Hiddate" name="csrfmiddlewaretoken" value="{% csrf_token %}"/>
-                <button type="submit" >submit</button>
+                <button type="submit">submit</button>
             </form>
+            <div id="progressBar"
+                 style="width:100%;height:60px;margin-top: 20px;"
+                 data-preset="rainbow">
+            </div>
         </div>
     </div>
 
