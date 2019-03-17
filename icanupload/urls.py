@@ -24,4 +24,4 @@ urlpatterns = [
     path('superadmin/', admin.site.urls),
     url(r'^', include('dashboard.urls')),
     url(r'^upload/$', views.FileUpload, name="upload"),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
