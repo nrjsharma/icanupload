@@ -1,14 +1,15 @@
 from django.http import HttpResponse
-from .models import FileAddress
+from .models import FileAddress, FileData
 
 def FileUpload(request):
 
     if request.method == 'POST' and request.FILES.get('file', False):
         files = request.FILES.getlist('file')
-        print('files ', files)
+        file_data = FileData()
+        file_data.save()
         for file in files:
-            obj = FileAddress(document=file)
+            obj = FileAddress(token=file_data,document=file)
             obj.save()
-        return HttpResponse('file uploaded succesfuly')
+        return HttpResponse(file_data.token)
     else:
         return HttpResponse('else')
