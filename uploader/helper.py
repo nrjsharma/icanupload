@@ -4,7 +4,6 @@ import random
 def generate_token():
     for _ in range(10):
         token = str(random.randint(1000, 9999))
-        print('token ',token)
         if not FileData.objects.filter(token=token):
             return token
     else:

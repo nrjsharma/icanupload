@@ -23,5 +23,6 @@ from django.conf import settings
 urlpatterns = [
     path('superadmin/', admin.site.urls),
     url(r'^', include('dashboard.urls')),
-    url(r'^upload/$', views.FileUpload, name="upload"),
+    url(r'^upload/$', views.file_upload, name="upload"),
+    url(r'^save-password/$', views.save_password, name="save-password"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,6 +4,24 @@ function openFileChooser() {
     });
 }
 
+function SavePassword(event) {
+    var token = $('#in_token').val()
+    var password = $('#in_password').val()
+    $.ajax({
+        url: '/save-password/',
+        type: 'POST',
+        data: {'token':token, 'password':password, 'csrfmiddlewaretoken':$.cookie("csrftoken")},
+        success: function (data) {
+            alert('success')
+            alert(data)
+        }, error: function (rs, e) {
+            alert('error')
+            alert(rs.responseText);
+        }
+
+    });
+}
+
 function startUploading() {
     $("#getFile").change(function () {
         var progress_bar = new ldBar("#progressBar");
@@ -44,14 +62,15 @@ function startUploading() {
                     animation: 'top',
                     title: 'Upload File',
                     content: '' +
-                    '<form action="" class="formName">' +
+                    '<form class="formName" id="main_form" method="post" onsubmit="SavePassword();return false;">' +
                     '<div class="form-group">' +
                     '<label>key</label>' +
-                    '<input type="text" placeholder="Your name" class="name form-control" value=' + data + ' disabled="true" />' +
+                    '<input type="text" id="in_token" placeholder="Your name" name="token" class="name form-control" value=' + data + ' disabled="true"  required/>' +
                     '<label style="margin-top: 10px">password</label>' +
-                    '<input type="password" placeholder="optional" class="name form-control" />' +
+                    '<input type="password" id="in_password" placeholder="optional" name="password" class="name form-control" />' +
                     '<button class="btn btn-primary btn-lg" style="width: 100%;margin-top: 13px">Save</button>' +
                     '</div>' +
+                    '<input type="hidden" name="hidden_token" value="' + data + '">' +
                     '</form>',
                 });
             }, error: function (rs, e) {
@@ -60,6 +79,7 @@ function startUploading() {
         });
     });
 }
+
 
 $(document).ready(function () {
     openFileChooser();
