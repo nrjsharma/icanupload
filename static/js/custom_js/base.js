@@ -6,7 +6,7 @@ function openFileChooser() {
 
 function startUploading() {
     $("#getFile").change(function () {
-        var progress_bar = new ldBar("#progressBar") ;
+        var progress_bar = new ldBar("#progressBar");
         var data = new FormData($('form')[1]);
         data.append('csrfmiddlewaretoken', $.cookie("csrftoken"));
         var form_url = $('#form_upload').attr('action');
@@ -20,11 +20,11 @@ function startUploading() {
 
                 xhr.upload.addEventListener("progress", function (evt) {
                     var percent = Math.round(evt.loaded / evt.total * 100)
-                    if(percent<100){
-                        progress_bar.set( Math.round(percent));
+                    if (percent < 100) {
+                        progress_bar.set(Math.round(percent));
                     }
                     else {
-                        document.getElementById("progressBar").innerHTML="<i>loading...</i>";
+                        document.getElementById("progressBar").innerHTML = "<i>loading...</i>";
                     }
                 });
                 return xhr;
@@ -37,12 +37,24 @@ function startUploading() {
             contentType: false,
             success: function (data) {
                 $.dialog({
-                    backgroundDismiss: true,
+                    backgroundDismiss: false,
+                    boxWidth: '300px',
+                    icon: 'fas fa-file-upload',
+                    useBootstrap: false,
                     animation: 'top',
-                    title: 'Done!',
-                    content: data,
+                    title: 'Upload File',
+                    content: '' +
+                    '<form action="" class="formName">' +
+                    '<div class="form-group">' +
+                    '<label>key</label>' +
+                    '<input type="text" placeholder="Your name" class="name form-control" value=' + data + ' disabled="true" />' +
+                    '<label style="margin-top: 10px">password</label>' +
+                    '<input type="password" placeholder="optional" class="name form-control" />' +
+                    '<button class="btn btn-primary btn-lg" style="width: 100%;margin-top: 13px">Save</button>' +
+                    '</div>' +
+                    '</form>',
                 });
-            },error:function (rs,e) {
+            }, error: function (rs, e) {
                 alert(rs.responseText);
             }
         });
