@@ -1,25 +1,105 @@
+var token;
+var password;
+
 function openFileChooser() {
     $("#upload_btn").click(function () {
         $("#getFile").click();
     });
 }
 
-function SavePassword(event) {
-    var token = $('#in_token').val()
-    var password = $('#in_password').val()
+function ShowPassword() {
+    $("#done_password").attr("type", "text");
+}
+
+function CopyLink() {
+
+    var tempInput = document.createElement("input");
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.value = document.getElementById("done_link").value;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    $.alert({
+        icon: 'fas fa-thumbs-up',
+        title: 'Done',
+        content: 'Link Copy Successfully',
+        type: 'green',
+    });
+
+}
+
+
+function DoneModal() {
+    var urls = "icanupload.com/?s=" + token
+    if (password) {
+        $.dialog({
+            backgroundDismiss: false,
+            boxWidth: '300px',
+            icon: 'fas fa-check-circle',
+            useBootstrap: false,
+            animation: 'top',
+            title: 'Done',
+            content: '' +
+            '<form class="formName" id="main_form" method="post">' +
+            '<div class="form-group">' +
+            '<label>key</label>' +
+            '<input type="text" id="done_token" placeholder="Your name" name="token" class="name form-control" value=' + token + ' disabled="true"  required/>' +
+            '<label style="margin-top: 10px">password</label><a href="javascript:ShowPassword()" style="padding-left: 10px">show</a>' +
+            '<input type="password" id="done_password" placeholder="optional" name="password" class="name form-control"  disabled="true" value = ' + password + ' />' +
+            '<label style="margin-top: 10px">link</label><a href="javascript:CopyLink()" style="padding-left: 10px">copy</a>' +
+            '<input type="url" id="done_link" placeholder="optional" name="password" class="name form-control" value= ' + urls + ' disabled />' +
+            '</form>',
+            close: function (event, ui) {
+                location.reload();
+            }
+        });
+    } else {
+        $.dialog({
+            backgroundDismiss: false,
+            boxWidth: '300px',
+            icon: 'fas fa-check-circle',
+            useBootstrap: false,
+            animation: 'top',
+            title: 'Done',
+            content: '' +
+            '<form class="formName" id="main_form" method="post">' +
+            '<div class="form-group">' +
+            '<label>key</label>' +
+            '<input type="text" id="done_token" placeholder="Your name" name="token" class="name form-control" value=' + token + ' disabled="true"  required/>' +
+            '<label style="margin-top: 10px">link</label><a href="#" onclick="CopyLink()" style="padding-left: 10px">copy</a>' +
+            '<input type="url" id="done_link" placeholder="optional" name="password" class="name form-control" value= ' + urls + ' disabled />' +
+            '</form>',
+            close: function (event, ui) {
+                location.reload();
+            }
+        });
+    }
+}
+
+function SavePassword() {
+    token = $('#in_token').val()
+    password = $('#in_password').val()
+    var delete_after = $('input[name=time]:checked').val();
     $.ajax({
         url: '/save-password/',
         type: 'POST',
-        data: {'token':token, 'password':password, 'csrfmiddlewaretoken':$.cookie("csrftoken")},
+        data: {
+            'token': token,
+            'password': password,
+            'delete_after': delete_after,
+            'csrfmiddlewaretoken': $.cookie("csrftoken")
+        },
         success: function (data) {
-            alert('success')
-            alert(data)
+            //location.reload()
+            DoneModal()
         }, error: function (rs, e) {
             alert('error')
             alert(rs.responseText);
         }
 
     });
+
 }
 
 function startUploading() {
@@ -54,7 +134,7 @@ function startUploading() {
             processData: false,
             contentType: false,
             success: function (data) {
-                $.dialog({
+                $.confirm({
                     backgroundDismiss: false,
                     boxWidth: '300px',
                     icon: 'fas fa-file-upload',
@@ -62,16 +142,39 @@ function startUploading() {
                     animation: 'top',
                     title: 'Upload File',
                     content: '' +
-                    '<form class="formName" id="main_form" method="post" onsubmit="SavePassword();return false;">' +
+                    '<form class="formName" id="main_form" method="post">' +
                     '<div class="form-group">' +
                     '<label>key</label>' +
                     '<input type="text" id="in_token" placeholder="Your name" name="token" class="name form-control" value=' + data + ' disabled="true"  required/>' +
                     '<label style="margin-top: 10px">password</label>' +
                     '<input type="password" id="in_password" placeholder="optional" name="password" class="name form-control" />' +
-                    '<button class="btn btn-primary btn-lg" style="width: 100%;margin-top: 13px">Save</button>' +
+                    '<label style="margin-top: 10px;padding-bottom: 2px;">delete after</label>' +
+                    '<div id="radiobtn" style="margin-top: -6px;">' +
+                    '<div style="float: left;padding-left: 2px;">' +
+                    '<span style="float: left;width: 16px;"><input type="radio" value="1" autocomplete="off" name="time" checked/></span> <span style="float: right">1 day</span>' +
+                    '</div>' +
+                    '<div style="float: left;padding-left: 10px;">' +
+                    '<span style="float: left;width: 16px;"><input type="radio" value="3" autocomplete="off" name="time"/></span> <span style="float: right">3 day</span>' +
+                    '</div>' +
+                    '<div style="float: left;padding-left: 10px;">' +
+                    '<span style="float: left;width: 16px;"><input type="radio" value="7" autocomplete="off" name="time" /></span> <span style="float: right">7 day</span>' +
+                    '</div>' +
+                    '<div style="float: left;padding-left: 10px;">' +
+                    '<span style="float: left;width: 16px;"><input type="radio" value="30" autocomplete="off" name="time" /></span> <span style="float: right">30 day</span>' +
+                    '</div>' +
+                    '</div><!--radiobtn-->' +
                     '</div>' +
                     '<input type="hidden" name="hidden_token" value="' + data + '">' +
                     '</form>',
+                    buttons: {
+                        formSubmit: {
+                            text: 'done',
+                            btnClass: 'btn btn-primary btn-lg modal-button',
+                            action: function () {
+                                SavePassword()
+                            }
+                        },
+                    }
                 });
             }, error: function (rs, e) {
                 alert(rs.responseText);
@@ -79,7 +182,6 @@ function startUploading() {
         });
     });
 }
-
 
 $(document).ready(function () {
     openFileChooser();
