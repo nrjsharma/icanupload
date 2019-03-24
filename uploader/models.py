@@ -16,6 +16,7 @@ class FileData(models.Model):
 
 class FileAddress(models.Model):
     token = models.ForeignKey(FileData, related_name="file_data", on_delete=models.CASCADE)
+    document_name = models.TextField()
     document = models.FileField(upload_to='documents/%Y/%m/%d/')
 
     def __str__(self):

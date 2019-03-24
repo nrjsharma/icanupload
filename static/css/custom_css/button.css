@@ -23,6 +23,8 @@
 
 .jconfirm-buttons{
     width: 100%;
+    margin-top: -18px;
+    text-align: center;
 }
 
 .modal-button{
@@ -30,4 +32,11 @@
     font-size: 18px;
     height: 44px;
     margin-top: -4px;
+}
+
+.pass-button{
+    margin-top: -18px;
+}
+.close-button{
+    margin-top: 0px;
 }

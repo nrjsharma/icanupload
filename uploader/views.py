@@ -7,10 +7,11 @@ def file_upload(request):
 
     if request.method == 'POST' and request.FILES.get('file', False):
         files = request.FILES.getlist('file')
+        print('>>>>FILES>>>>>>>> >>><><>>>>> ',files)
         file_data = FileData()  # creating a FileData object
         file_data.save()
         for file in files:
-            obj = FileAddress(token=file_data,document=file)
+            obj = FileAddress(token=file_data, document_name=file.name, document=file)
             obj.save()
         return HttpResponse(file_data.token)
     else:

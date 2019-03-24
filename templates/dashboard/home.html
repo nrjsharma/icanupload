@@ -17,6 +17,91 @@
                  data-preset="rainbow">
             </div>
         </div>
+
+        {#        {% if file %}#}
+        {#            <script>#}
+        {#                $(document).ready(function () {#}
+        {#                    $.dialog({#}
+        {#                        backgroundDismiss: false,#}
+        {#                        boxWidth: '300px',#}
+        {#                        icon: 'fas fa-file-download',#}
+        {#                        useBootstrap: false,#}
+        {#                        animation: 'top',#}
+        {#                        title: 'Download',#}
+        {#                        content: '' +#}
+        {#                        '<div class="form-group" style="padding-top: 10px;">' +#}
+        {#                        {% for f in file.all %}#}
+        {#                            '<p><a href="media/{{ f.0 }}" download>{{ f.1 }}</a></p>'+#}
+        {#                            '<hr>'+#}
+        {#                        {% endfor %}#}
+        {#                        '</div>',#}
+        {#                    });#}
+        {#                });#}
+        {#            </script>#}
+        {#        {% endif %}#}
+        {% if data %}
+            <script>
+                $(document).ready(function () {
+                    {% if data == "Wrong" %}
+                        $.dialog({
+                            backgroundDismiss: false,
+                            boxWidth: '300px',
+                            icon: 'fas fa-ghost',
+                            useBootstrap: false,
+                            animation: 'top',
+                            title: 'Not Found',
+                            content: '' +
+                            '<div class="form-group" style="padding-top: 10px;text-align: center;">' +
+                            '<b>Key not found</b>' +
+                            '</div>',
+                        });
+                    {% else %}
+                        {% if data == "Download"%}
+                            alert('download')
+                        {% else %}
+                            $.confirm({
+                                backgroundDismiss: false,
+                                boxWidth: '300px',
+                                icon: 'fas fa-key',
+                                useBootstrap: false,
+                                animation: 'top',
+                                title: 'Password',
+                                content: '' +
+                                '<form action="" class="formName">' +
+                                '<div class="form-group">' +
+                                // '<label>enter password</label>' +
+                                '<input type="password" placeholder="enter password" class="name form-control" style="margin-top:10px" required />' +
+                                '</div>' +
+                                '</form>',
+                                buttons: {
+                                    formSubmit: {
+                                        text: 'Submit',
+                                        btnClass: 'btn btn-primary btn-lg',
+                                        action: function () {
+                                            var name = this.$content.find('.name').val();
+                                            if (!name) {
+                                                $.alert('provide a valid name');
+                                                return false;
+                                            }
+                                            $.alert('Your name is ' + name);
+                                        }
+                                    },
+                                    close: {
+                                        text: 'Close',
+
+                                        action: function () {
+                                            window.location.href = '/';
+                                        }
+                                    },
+                                },
+                            });
+
+                        {% endif %}
+                    {% endif %}
+                });
+            </script>
+        {% endif %}
+
     </div>
 
 {% endblock %}

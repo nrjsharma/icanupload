@@ -7,6 +7,20 @@ function openFileChooser() {
     });
 }
 
+function search() {
+    $("#search_form").submit(function (event) {
+        var key = $("#search_key").val();
+        event.preventDefault();
+        if (key){
+         window.location.href = 'http://127.0.0.1:55300/?s='+key;
+        }else{
+            window.location.href = '/';
+        }
+
+    });
+}
+
+
 function ShowPassword() {
     $("#done_password").attr("type", "text");
 }
@@ -186,4 +200,5 @@ function startUploading() {
 $(document).ready(function () {
     openFileChooser();
     startUploading();
+    search();
 });
