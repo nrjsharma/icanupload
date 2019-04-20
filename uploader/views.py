@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from .models import FileAddress, FileData
 from datetime import datetime, timedelta
 
@@ -15,7 +15,7 @@ def file_upload(request):
             obj.save()
         return HttpResponse(file_data.token)
     else:
-        return HttpResponse('else')
+        return HttpResponseNotFound('404')
 
 
 def save_password(request):
