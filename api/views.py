@@ -14,8 +14,6 @@ class ListDownload(APIView):
     def get(self, request):
         _token = request.GET.get('token', None)
         _password = request.GET.get('password', None)
-        print('token', _token)
-        print('password', _password)
         if _password is None or _password == 'null':
             _password = None
         try:
