@@ -1,5 +1,9 @@
 var token;
 var password;
+var get_token = {
+    'X-CSRFToken': $.cookie("csrftoken")
+}
+
 
 function openFileChooser() {
     $("#upload_btn").click(function () {
@@ -12,11 +16,10 @@ function search() {
         var key = $("#search_key").val();
         event.preventDefault();
         if (key){
-         window.location.href = 'http://127.0.0.1:55300/?s='+key;
+         window.location.href = '/?s='+key;
         }else{
             window.location.href = '/';
         }
-
     });
 }
 
@@ -96,8 +99,9 @@ function SavePassword() {
     password = $('#in_password').val()
     var delete_after = $('input[name=time]:checked').val();
     $.ajax({
-        url: '/save-password/',
-        type: 'POST',
+        url: SAVE_PASSWORD_URL+ token + '/',
+        headers: get_token,
+        type: 'PATCH',
         data: {
             'token': token,
             'password': password,
@@ -105,7 +109,6 @@ function SavePassword() {
             'csrfmiddlewaretoken': $.cookie("csrftoken")
         },
         success: function (data) {
-            //location.reload()
             DoneModal()
         }, error: function (rs, e) {
             alert('error')
@@ -156,7 +159,7 @@ function startUploading() {
                     animation: 'top',
                     title: 'Upload File',
                     content: '' +
-                    '<form class="formName" id="main_form" method="post">' +
+                    '<form class="formName" id="main_form" method="patch">' +
                     '<div class="form-group">' +
                     '<label>key</label>' +
                     '<input type="text" id="in_token" placeholder="Your name" name="token" class="name form-control" value=' + data + ' disabled="true"  required/>' +

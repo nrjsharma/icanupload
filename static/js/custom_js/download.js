@@ -4,7 +4,7 @@
 function downloadModel(key, password=null) {
     if(key) {
         $.ajax({
-            url: 'api/v1/show-download-list/?token=' + key + '&password=' + password,
+            url: SHOW_DOWNLOAD_LIST_URL + '/?token=' + key + '&password=' + password,
             type: 'GET',
             success: function (data) {
                 var output = ""

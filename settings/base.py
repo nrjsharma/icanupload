@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'icanupload.wsgi.application'
+WSGI_APPLICATION = 'icanupload.wsgi.wsgi_dev.application'
 
 
 # Database

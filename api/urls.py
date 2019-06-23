@@ -2,8 +2,11 @@ from django.conf.urls import url
 from rest_framework import routers
 from . import views
 
+app_name = 'api'
+
 router = routers.DefaultRouter()
-# router.register(r'download', views.ListDownload(), base_name="download")
+router.register(r'save-password', views.SavePasswordViewSet, base_name="save-password")
 urlpatterns = [
-                   url(r'^show-download-list/', views.ListDownload.as_view(), name="show-download-list"),
+                url(r'^show-download/', views.ListDownload.as_view(), name="show-download-list"),
               ]
+urlpatterns += router.urls

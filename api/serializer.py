@@ -1,9 +1,14 @@
-from rest_framework import serializers
-from uploader.models import FileAddress
+from rest_framework.serializers import ModelSerializer
+from uploader.models import FileAddress, FileData
 
 
-class FileAddressSerializer(serializers.ModelSerializer):
-
+class FileAddressSerializer(ModelSerializer):
     class Meta:
         model = FileAddress
         fields = ('document', 'document_name')
+
+
+class FileDataSerializers(ModelSerializer):
+    class Meta:
+        model = FileData
+        fields = '__all__'
