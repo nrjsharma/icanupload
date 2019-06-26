@@ -103,7 +103,6 @@ function SavePassword() {
         headers: get_token,
         type: 'PATCH',
         data: {
-            'token': token,
             'password': password,
             'delete_after': delete_after,
             'csrfmiddlewaretoken': $.cookie("csrftoken")

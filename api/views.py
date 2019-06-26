@@ -1,12 +1,12 @@
 # Api view
+from django.shortcuts import get_object_or_404
+from rest_framework import status
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from uploader.models import FileData, FileAddress
 from .serializer import FileAddressSerializer, FileDataSerializers
 from rest_framework.viewsets import ModelViewSet
-from uploader.models import FileData
-from datetime import datetime, timedelta
 
 
 class ListDownload(APIView):
@@ -29,24 +29,24 @@ class ListDownload(APIView):
             serializer = FileAddressSerializer(file_address, many=True)
             return Response(serializer.data)
         except FileData.DoesNotExist:
-            return Response({'error': 'token not found'}, status=HTTP_404_NOT_FOUND)
+            return Response({'error': 'token not found'}, status=HTTP_404_NOT_FOUND)  # NOQA
 
 
 class SavePasswordViewSet(ModelViewSet):
     queryset = FileData.objects.none()
     serializer_class = FileDataSerializers
 
-    def update(self, request, token=None, *args, **kwargs):
-        print('-------I AM IN UPDATE---------', token)
+    def update(self, request, pk=None, *args, **kwargs):
+        token = pk
+        file_data = get_object_or_404(FileData, token=token)
+        pk = file_data.pk
         password = request.POST.get('password', '')
-        delete_after_days = request.POST.get('delete_after', '')
-        delete_after = datetime.now() + timedelta(days=int(delete_after_days))
-        print('password', password)
-        print('delete_after', delete_after)
-        if password:
-            print("Password in")
-            obj = FileData.objects.get(token=token)
-            obj.password = password
-            obj.delete_date = delete_after
-            obj.save()
-        return Response('hello')
+        data = {
+            'password': password
+        }
+        _serializer = self.serializer_class(file_data, data)
+        if _serializer.is_valid():
+            _serializer.save()
+            return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA
+        else:
+            return Response(data=_serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # NOQA

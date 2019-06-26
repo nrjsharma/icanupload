@@ -11,4 +11,4 @@ class FileAddressSerializer(ModelSerializer):
 class FileDataSerializers(ModelSerializer):
     class Meta:
         model = FileData
-        fields = '__all__'
+        fields = ('password', )

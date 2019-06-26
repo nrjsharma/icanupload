@@ -22,9 +22,14 @@ class FileAddress(models.Model):
     def __str__(self):
         return '%s' % self.token
 
-from .helper import generate_token
-
 
 @receiver(pre_save, sender=FileData)
-def pre_save_token(sender, **kwargs):
-    kwargs['instance'].token = generate_token()
+def pre_save_file_data(sender, instance=None, created=False, **kwargs):
+    from .helper import generate_token
+    if instance._state.adding is True:
+        # Creating an object
+        print('pre_sav_file_data EXICUTED')
+        instance.token = generate_token()
+    else:
+        # Updating an object
+        pass
