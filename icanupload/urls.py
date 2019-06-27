@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import (url, include)
-from uploader import views
 from django.conf.urls.static import static
 from django.conf import settings
 from api import urls
@@ -24,7 +23,5 @@ from api import urls
 urlpatterns = [
     path('superadmin/', admin.site.urls),
     url(r'^', include('dashboard.urls')),
-    url(r'^upload/$', views.file_upload, name="upload"),
-    url(r'^save-password/$', views.save_password, name="save-password"),
     url(r'api/v1/', include(urls), name='api')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

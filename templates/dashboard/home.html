@@ -4,7 +4,7 @@
     <div class="row" id="upload_outer_div">
         <div class="col-md-12" style="text-align: center;">
             <h2 class="tagline">No matter where you go – <br>take your files with you</h2>
-            <form action="{% url 'upload' %}" method="post" id="form_upload" enctype="multipart/form-data">
+            <form action="{% url 'api:upload-file' %}" method="post" id="form_upload" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="button" id="upload_btn">Upload</div>
                 <input type="file" name="file" id="getFile" autocomplete=off

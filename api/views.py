@@ -9,7 +9,7 @@ from .serializer import FileAddressSerializer, FileDataSerializers
 from rest_framework.viewsets import ModelViewSet
 
 
-class ListDownload(APIView):
+class ListDownloadAPIView(APIView):
 
     # authentication_classes = (authentication.TokenAuthentication,)
     # permission_classes = (permissions.IsAdminUser,)
@@ -32,7 +32,23 @@ class ListDownload(APIView):
             return Response({'error': 'token not found'}, status=HTTP_404_NOT_FOUND)  # NOQA
 
 
+class FileUploadAPIView(APIView):
+
+    def post(self, request):
+        if request.FILES.get('file', False):
+            files = request.FILES.getlist('file')
+            file_data = FileData()  # creating a FileData object
+            file_data.save()
+            for file in files:
+                obj = FileAddress(token=file_data, document_name=file.name, document=file)  # NOQA
+                obj.save()
+            return Response({'data': file_data.token}, status=201)
+        else:
+            return Response({'data': '404'}, status=404)
+
+
 class SavePasswordViewSet(ModelViewSet):
+
     queryset = FileData.objects.none()
     serializer_class = FileDataSerializers
 

@@ -161,7 +161,7 @@ function startUploading() {
                     '<form class="formName" id="main_form" method="patch">' +
                     '<div class="form-group">' +
                     '<label>key</label>' +
-                    '<input type="text" id="in_token" placeholder="Your name" name="token" class="name form-control" value=' + data + ' disabled="true"  required/>' +
+                    '<input type="text" id="in_token" placeholder="Your name" name="token" class="name form-control" value=' + data.data + ' disabled="true"  required/>' +
                     '<label style="margin-top: 10px">password</label>' +
                     '<input type="password" id="in_password" placeholder="optional" name="password" class="name form-control" />' +
                     '<label style="margin-top: 10px;padding-bottom: 2px;">delete after</label>' +
