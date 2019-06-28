@@ -8,14 +8,14 @@ class FileData(models.Model):
     token = models.CharField(max_length=4, unique=True)
     password = models.CharField(max_length=255, null=True, blank=True)
     upload_date = models.DateTimeField(default=datetime.now())
-    delete_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))
+    delete_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))  # NOQA
 
     def __str__(self):
         return '%s' % self.token
 
 
 class FileAddress(models.Model):
-    token = models.ForeignKey(FileData, related_name="file_data", on_delete=models.CASCADE)
+    token = models.ForeignKey(FileData, related_name="file_data", on_delete=models.CASCADE)  # NOQA
     document_name = models.TextField()
     document = models.FileField(upload_to='documents/%Y/%m/%d/')
 

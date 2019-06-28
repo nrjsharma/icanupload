@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='filedata',
             name='delete_date',
-            field=models.DateTimeField(default=datetime.datetime(2019, 3, 24, 14, 30, 19, 865589)),
+            field=models.DateTimeField(default=datetime.datetime(2019, 3, 24, 14, 30, 19, 865589)),  # NOQA
         ),
         migrations.AlterField(
             model_name='filedata',
             name='upload_date',
-            field=models.DateTimeField(default=datetime.datetime(2019, 3, 23, 14, 30, 19, 865472)),
+            field=models.DateTimeField(default=datetime.datetime(2019, 3, 23, 14, 30, 19, 865472)),  # NOQA
         ),
     ]

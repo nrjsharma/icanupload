@@ -4,4 +4,4 @@
 from .base import *  # NOQA
 from db.sandbox_db import DATABASES  # NOQA
 
-ENV="SANDBOX"
+ENV = "SANDBOX"
