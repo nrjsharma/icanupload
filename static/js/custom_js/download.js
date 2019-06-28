@@ -1,7 +1,7 @@
 /**
  * Created by neeraj on 31/03/19.
  */
-function downloadModel(key, password=null) {
+function downloadModel(key, password="") {
     if(key) {
         $.ajax({
             url: SHOW_DOWNLOAD_LIST_URL + '/?token=' + key + '&password=' + password,
