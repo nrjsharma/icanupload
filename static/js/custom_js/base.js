@@ -181,7 +181,8 @@ function startUploading() {
                     '</div><!--radiobtn-->' +
                     '</div>' +
                     '<input type="hidden" name="hidden_token" value="' + data + '">' +
-                    '</form>',
+                    '</form>' +
+                    '<div style="min-height: 20px"></div>',
                     buttons: {
                         formSubmit: {
                             text: 'done',
