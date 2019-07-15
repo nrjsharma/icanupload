@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'dashboard',
     'uploader',
     'api',
-    'auth'
+    'authuser'
 ]
 
 MIDDLEWARE = [
