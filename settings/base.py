@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'dashboard',
     'uploader',
-    'api'
+    'api',
+    'auth'
 ]
 
 MIDDLEWARE = [
@@ -123,7 +124,7 @@ USE_TZ = True
 # for JS and CSS
 STATIC_URL = '/static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static/'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # For file uploading
 MEDIA_URL = '/media/'
