@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="msvalidate.01" content="B34B4191E0BDA0C769D024E1913BF843"/><!--for Bling-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICanUpload - No matter where you go – take your files with you</title>
+    <link rel="shortcut icon" href="{% static 'Images/icu_icon.png' %}"/>  <!--Title Img-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <!--ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--jquery-confirm-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!--Added to get csrf token from cookie-->
+    <!-- code to get token = $.cookie("csrftoken") -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!--Progress-bar-->
+    <script src="{% static 'loading-bar/loading-bar.js' %}"></script>
+    <script src="{% static 'loading-bar/loading-bar.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'loading-bar/loading-bar.css' %}">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!--Custom_CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_css/button.css' %}">
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    {% include 'dashboard/nav.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+<script>
+    var SHOW_DOWNLOAD_LIST_URL = "{% url 'api:show-download-list' %}"
+    var SAVE_PASSWORD_URL = "{% url 'api:save-password-list' %}"
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous">
+</script>
+
+<!--Custom_JS-->
+<script src="{% static 'js/custom_js/dashboard/base.js' %}"></script>
+<script src="{% static 'js/custom_js/dashboard/download.js' %}"></script>
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+</body>
+
+</html>

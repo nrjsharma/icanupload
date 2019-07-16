@@ -26,34 +26,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <!--Progress-bar-->
     <script src="{% static 'loading-bar/loading-bar.js' %}"></script>
-    <script src="{% static 'loading-bar/loading-bar.min.js'%}"></script>
+    <script src="{% static 'loading-bar/loading-bar.min.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'loading-bar/loading-bar.css' %}">
     <!--fontawesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!--Custom_CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom_css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_css/font.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom_css/button.css' %}">
     <!--Custom_JS-->
-    <script src="{% static 'js/custom_js/base.js' %}"></script>
-    <script src="{% static 'js/custom_js/download.js' %}"></script>
-
+    <script src="{% static 'js/custom_js/authuser/signup.js' %}"></script>
 </head>
 
 <body>
 
-<div class="container">
-
-    {% include 'nav.html' %}
+<div class="container" style="padding-top: 8%;padding-bottom: 5%;">
 
     {% block content %}
-
-    {% endblock %}
-
-    {% block extra_js %}
-
-    {% endblock %}
-
-    {% block extra_css %}
 
     {% endblock %}
 
@@ -66,10 +56,27 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
+<!--Custom_JS-->
+<script src="{% static 'js/custom_js/authuser/signup.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+html {
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(../../static/images/background.jpg) no-repeat center fixed;
+}
+</style>
+{% endblock %}
+
 </body>
 
 </html>

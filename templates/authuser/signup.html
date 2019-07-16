@@ -1,0 +1,46 @@
+{% extends 'authuser/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container h-100 d-flex justify-content-center">
+        <div class="jumbotron my-auto" style="min-width: 50%;padding: 3rem 2rem;background-color: #FFFFFF;">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'Images/logo.png' %}" style="width: 150px;"
+                     class="d-inline-block align-top" alt="icanupload.com">
+            </a>
+            <h1>Create your account</h1>
+            <p>Already have an account? <a href="/">Log In</a></p>
+            <form id="siginup-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstname">First name</label>
+                        <input type="text" class="form-control" id="firstname" placeholder="First name" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastname">Last name</label>
+                        <input type="text" class="form-control" id="lastname" placeholder="Last name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">User name</label>
+                    <input type="text" class="form-control" id="username" placeholder="User name" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="conform">Conform</label>
+                        <input type="password" class="form-control" id="conform" placeholder="Conform" autocomplete="off">
+                    </div>
+                </div>
+                <p id="error-msg"></p>
+                <button type="submit" class="btn btn-primary">Sign Me Up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
