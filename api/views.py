@@ -1,17 +1,45 @@
-# Api view
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.generics import CreateAPIView
 from uploader.models import FileData, FileAddress
-from .serializer import FileAddressSerializer, FileDataSerializers
+from api.serializer import (FileAddressSerializer, FileDataSerializers, SignUpUserSerializer)  # NOQA
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated, AllowAny  # NOQA
+from django.contrib.auth import get_user_model
+
+
+class SignUpUserAPIView(CreateAPIView):
+    """
+    Allow user to signup
+    """
+    model = get_user_model()
+    serializer_class = SignUpUserSerializer
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        email = request.POST.get('email', None)
+        if not email:
+            return Response({'email': ['please provide email']}, status=400)
+        elif get_user_model().objects.filter(email=email).exists():
+            return Response({'email': ['email already exist']}, status=400)
+        else:
+            data = request.data
+            _serialized = self.serializer_class(data=data)
+            if _serialized.is_valid():
+                _serialized.save()
+                return Response({'data': 'user is created successfully'}, status=201)  # NOQA
+            else:
+                return Response(_serialized.errors, status=400)
 
 
 class ShowDownloadAPIView(APIView):
-
-    # authentication_classes = (authentication.TokenAuthentication,)
-    # permission_classes = (permissions.IsAdminUser,)
+    """
+    It will return list of file of the given token from dashboard page
+    """
+    permission_classes = (AllowAny,)
+    http_method_names = ['get', ]
 
     @classmethod
     def get_extra_actions(cls):
@@ -33,6 +61,11 @@ class ShowDownloadAPIView(APIView):
 
 
 class FileUploadAPIView(APIView):
+    """
+    This API will upload files from dashboard page
+    """
+    permission_classes = (AllowAny,)
+    http_method_names = ['post', ]
 
     def post(self, request):
         if request.FILES.get('file', False):
@@ -48,14 +81,18 @@ class FileUploadAPIView(APIView):
 
 
 class SavePasswordViewSet(ModelViewSet):
-
+    """
+    This API will save password if password is provided by the user from dashboard page.  # NOQA
+    """
     queryset = FileData.objects.none()
     serializer_class = FileDataSerializers
+    permission_classes = (AllowAny,)
+    http_method_names = ['patch', ]
 
     def update(self, request, pk=None, *args, **kwargs):
         token = pk
         file_data = get_object_or_404(FileData, token=token)
-        pk = file_data.pk
+        pk = file_data.pk  # NOQA
         password = request.POST.get('password', '')
         data = {
             'password': password

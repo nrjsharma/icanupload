@@ -9,33 +9,34 @@
             </a>
             <h1>Create your account</h1>
             <p>Already have an account? <a href="/">Log In</a></p>
-            <form id="siginup-form">
+            <form method="post" id="siginup-form">
+                {% csrf_token %}
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstname">First name</label>
-                        <input type="text" class="form-control" id="firstname" placeholder="First name" autocomplete="off">
+                        <input type="text" name="first_name" class="form-control" id="firstname" placeholder="First name" autocomplete="off">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastname">Last name</label>
-                        <input type="text" class="form-control" id="lastname" placeholder="Last name" autocomplete="off">
+                        <input type="text" class="form-control" name="last_name" id="lastname" placeholder="Last name" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="username">User name</label>
-                    <input type="text" class="form-control" id="username" placeholder="User name" autocomplete="off">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="User name" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="conform">Conform</label>
-                        <input type="password" class="form-control" id="conform" placeholder="Conform" autocomplete="off">
+                        <label for="conform">confirm</label>
+                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confirm" autocomplete="off">
                     </div>
                 </div>
                 <p id="error-msg"></p>

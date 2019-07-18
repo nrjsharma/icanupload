@@ -1,3 +1,6 @@
+var get_token = {
+    'X-CSRFToken': $.cookie("csrftoken")
+}
 function reset_variable() {
     $('#error-msg').html('');
     $('#error-msg').css("display", "none");
@@ -11,7 +14,7 @@ function compare_passwords(pass1, pass2) {
 }
 
 function reset_border_color() {
-    var input_field_list = ['firstname', 'lastname', 'username', 'email', 'password', 'conform']
+    var input_field_list = ['firstname', 'lastname', 'username', 'email', 'password', 'confirm']
     for (var input_field_id of input_field_list) {
         document.getElementById(input_field_id).style.borderColor = "";
     }
@@ -26,7 +29,7 @@ $("#siginup-form").submit(function (event) {
     var user_name = $('#username').val();
     var email = $('#email').val();
     var password = $('#password').val();
-    var conform_password = $('#conform').val();
+    var confirm_password = $('#confirm').val();
     if (!first_name) {
         empty_field_list.push('firstname')
     }
@@ -42,8 +45,8 @@ $("#siginup-form").submit(function (event) {
     if (!password) {
         empty_field_list.push('password')
     }
-    if (!conform_password) {
-        empty_field_list.push('conform')
+    if (!confirm_password) {
+        empty_field_list.push('confirm')
     }
     if (empty_field_list.length > 0) {
         $('#error-msg').html('fill all required fields');
@@ -52,19 +55,42 @@ $("#siginup-form").submit(function (event) {
             document.getElementById(empty_field_id).style.borderColor = "red";
         }
         console.info('fill all required fields')
-    } else if (!compare_passwords(password, conform_password)) {
+    } else if (!compare_passwords(password, confirm_password)) {
         document.getElementById('password').style.borderColor = "red";
-        document.getElementById('conform').style.borderColor = "red";
+        document.getElementById('confirm').style.borderColor = "red";
         $('#error-msg').html('password did\'t match');
         $('#error-msg').css("display", "block");
         console.info('password did\'t match');
     } else if (password.length < 6) {
         document.getElementById('password').style.borderColor = "red";
-        document.getElementById('conform').style.borderColor = "red";
+        document.getElementById('confirm').style.borderColor = "red";
         $('#error-msg').html('password must be of minimum 6 characters length');
         $('#error-msg').css("display", "block");
-    }else{
-        // submit form
+    } else {
+        // SIGNUP USER
+        var form = $('#siginup-form');
+        var form_data = form.serialize();
+        var form_type = form.attr('method');
+        $.ajax({
+            url: SIGNUP_USER_URL,
+            headers: get_token,
+            type: form_type,
+            data: form_data,
+            success: function (data) {
+                alert('user created')
+            }, error: function (rs, e) {
+                console.error(rs.responseText)
+                $('#error-msg').css("display", "block");
+                var errors = JSON.parse(rs.responseText)
+                for (i in errors){
+                    document.getElementById(i).style.borderColor = "red";
+                    $('#error-msg').html($('#error-msg').html() + errors[i][0] + '<br />');
+                }
+            }, complete: function () {
+                console.log('request completed')
+            }
+
+        }); // end ajax
     }
 
 });
