@@ -8,7 +8,6 @@ def home(request):
     if request.method == "GET":
         token_id = request.GET.get('s', '')
         if token_id:
-            # file = FileData.objects.filter(token=token_id).values_list('password', 'file_data__document', 'file_data__document_name')  # NOQA
             try:
                 file = FileData.objects.get(token=token_id)
                 if file.password:

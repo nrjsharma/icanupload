@@ -27,9 +27,9 @@ class FileAddress(models.Model):
 def pre_save_file_data(sender, instance=None, created=False, **kwargs):
     from .helper import generate_token
     if instance._state.adding is True:
-        # Creating an object
+        # If Creating an object
         print('pre_sav_file_data EXICUTED')
         instance.token = generate_token()
     else:
-        # Updating an object
+        # If Updating an object
         pass

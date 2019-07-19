@@ -1,19 +1,30 @@
+# Django Import
+from django.contrib.auth import get_user_model, login, logout
 from django.shortcuts import get_object_or_404
+
+# REST Framework Import
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated, AllowAny  # NOQA
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
+
+# Local Apps Import
 from uploader.models import FileData, FileAddress
-from api.serializer import (FileAddressSerializer, FileDataSerializers, SignUpUserSerializer)  # NOQA
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, AllowAny  # NOQA
-from django.contrib.auth import get_user_model
+from api.serializer import (FileAddressSerializer, FileDataSerializers, SignUpUserSerializer,  # NOQA
+                            LoginSerializer)  # NOQA
 
 
-class SignUpUserAPIView(CreateAPIView):
+class SignUpUserView(CreateAPIView):
     """
     Allow user to signup
     """
+    permission_classes = (AllowAny,)
+    http_method_names = ['post', ]
+
     model = get_user_model()
     serializer_class = SignUpUserSerializer
     permission_classes = (AllowAny,)
@@ -34,7 +45,31 @@ class SignUpUserAPIView(CreateAPIView):
                 return Response(_serialized.errors, status=400)
 
 
-class ShowDownloadAPIView(APIView):
+class LoginView(APIView):
+    serializer_class = LoginSerializer
+    permission_classes = (AllowAny,)
+    http_method_names = ['post', ]
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data["user"]
+        login(request, user)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key}, status=200)
+
+
+class LogoutView(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    http_method_names = ['post', ]
+
+    def post(self, request):
+        logout(request)
+        return Response(status=200)
+
+
+class ShowDownloadView(APIView):
     """
     It will return list of file of the given token from dashboard page
     """
@@ -60,7 +95,7 @@ class ShowDownloadAPIView(APIView):
         return Response(serializer.data)
 
 
-class FileUploadAPIView(APIView):
+class FileUploadView(APIView):
     """
     This API will upload files from dashboard page
     """

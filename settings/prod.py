@@ -5,3 +5,4 @@ from settings.base import *  # NOQA
 from settings.db.prod_db import DATABASES  # NOQA
 
 ENV = "PRODUCTION"
+DEBUG = False

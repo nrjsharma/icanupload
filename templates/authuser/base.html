@@ -51,6 +51,8 @@
 
 <script>
     var SIGNUP_USER_URL = "{% url 'api:signup' %}"
+    var LOGIN_URL = "{% url 'api:login' %}"
+    var LOGOUT_URL = "{% url 'api:logout' %}"
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -63,7 +65,7 @@
 </script>
 
 <!--Custom_JS-->
-<script src="{% static 'js/custom_js/authuser/signup.js' %}"></script>
+
 
 {% block extra_js %}
 {% endblock %}

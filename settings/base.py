@@ -29,8 +29,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '35.244.14.92', 'icanupload.com']
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+
+    # Rest Framework Apps
     'rest_framework',
+    'rest_framework.authtoken',
+
+    # Third-Party Apps
+
+
+    # ICanUpload Apps
     'dashboard',
     'uploader',
     'api',
@@ -56,6 +64,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'icanupload.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 TEMPLATES = [
     {

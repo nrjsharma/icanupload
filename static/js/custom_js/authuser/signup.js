@@ -21,15 +21,15 @@ function reset_border_color() {
 }
 $("#siginup-form").submit(function (event) {
     event.preventDefault();
-    var empty_field_list = [];
+    let empty_field_list = [];
     reset_variable()
     reset_border_color()
-    var first_name = $('#firstname').val();
-    var last_name = $('#lastname').val();
-    var user_name = $('#username').val();
-    var email = $('#email').val();
-    var password = $('#password').val();
-    var confirm_password = $('#confirm').val();
+    let first_name = $('#firstname').val();
+    let last_name = $('#lastname').val();
+    let user_name = $('#username').val();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    let confirm_password = $('#confirm').val();
     if (!first_name) {
         empty_field_list.push('firstname')
     }
@@ -68,9 +68,9 @@ $("#siginup-form").submit(function (event) {
         $('#error-msg').css("display", "block");
     } else {
         // SIGNUP USER
-        var form = $('#siginup-form');
-        var form_data = form.serialize();
-        var form_type = form.attr('method');
+        let form = $('#siginup-form');
+        let form_data = form.serialize();
+        let form_type = form.attr('method');
         $.ajax({
             url: SIGNUP_USER_URL,
             headers: get_token,
