@@ -10,11 +10,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
-        <form id="logout_form">
-            {% csrf_token %}
-            <button type="submit" id="submitBtn" style="display:none;" data-validate="contact-form"></button>
-            <a class="nav-link" href="javascript:;" onclick="$('#submitBtn').click();">Log Out</a>
-        </form>
+        <a class="nav-link" href="/auth/login">LOG IN</a>
+        <a class="nav-link" href="/auth/signup">SIGN UP</a>
         <form method="get" class="form-inline" id="search_form">
             <input class="form-control mr-sm-2" type="search" id="search_key" placeholder="enter key"
                    aria-label="Search" value="{{ key }}" autocomplete="off">

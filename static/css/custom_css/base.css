@@ -26,12 +26,10 @@ a:hover {
     text-decoration: underline;
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus {
     outline: none;
 }
-
 .tagline {
-    /*        line-height: 2.10em;*/
     font-family: "Montserrat", sans-serif;
     font-size: 2.5em;
     font-weight: 600;
@@ -52,13 +50,27 @@ textarea:focus, input:focus{
 #upload_btn {
     margin-top: 15px;
 }
-#getFile{
+
+#getFile {
     display: none;
 }
-#form_upload button{
+
+#form_upload button {
     display: none;
 }
-#error-msg{
+
+#error-msg {
     color: red;
     display: none;
+}
+.center {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    padding: 3rem 2rem;
+    background-color: #FFFFFF;
+    width: 350px;
+    border-radius: 5px;
 }

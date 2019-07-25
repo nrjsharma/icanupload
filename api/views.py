@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny  # NOQA
 from rest_framework.authtoken.models import Token
-from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -60,7 +59,6 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
-    authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated, )
     http_method_names = ['post', ]
 

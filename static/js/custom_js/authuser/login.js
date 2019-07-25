@@ -43,7 +43,7 @@ $("#login-form").submit(function (event) {
             type: "post",
             data: form_data,
             success: function (data) {
-                alert('user Login')
+                window.location = '/'
             }, error: function (rs, e) {
                 console.error(rs.responseText)
                 console.error(rs.status)

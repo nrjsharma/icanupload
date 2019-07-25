@@ -1,48 +1,51 @@
 {% extends 'authuser/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container h-100 d-flex justify-content-center">
-        <div class="jumbotron my-auto" style="min-width: 50%;padding: 3rem 2rem;background-color: #FFFFFF;">
-            <a class="navbar-brand" href="/">
-                <img src="{% static 'images/logo.png' %}" style="width: 150px;"
-                     class="d-inline-block align-top" alt="icanupload.com">
-            </a>
-            <h1>Create your account</h1>
-            <p>Already have an account? <a href="/">Log In</a></p>
-            <form method="post" id="siginup-form">
-                {% csrf_token %}
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="firstname">First name</label>
-                        <input type="text" name="first_name" class="form-control" id="firstname" placeholder="First name" autocomplete="off">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="lastname">Last name</label>
-                        <input type="text" class="form-control" name="last_name" id="lastname" placeholder="Last name" autocomplete="off">
-                    </div>
+    <div class="container center" style="min-width: 30%">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'images/logo.png' %}" style="width: 150px;"
+                 class="d-inline-block align-top" alt="icanupload.com">
+        </a>
+        <h1>Create your account</h1>
+        <p>Already have an account? <a href="{% url 'auth:login' %}">Log In</a></p>
+        <form method="post" id="siginup-form">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">First name</label>
+                    <input type="text" name="first_name" class="form-control" id="firstname" placeholder="First name"
+                           autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label for="username">User name</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="User name" autocomplete="off">
+                <div class="form-group col-md-6">
+                    <label for="lastname">Last name</label>
+                    <input type="text" class="form-control" name="last_name" id="lastname" placeholder="Last name"
+                           autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="username">User name</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="User name"
+                       autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                           autocomplete="off">
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="conform">confirm</label>
-                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confirm" autocomplete="off">
-                    </div>
+                <div class="form-group col-md-6">
+                    <label for="conform">confirm</label>
+                    <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confirm"
+                           autocomplete="off">
                 </div>
-                <p id="error-msg"></p>
-                <button type="submit" class="btn btn-primary">Sign Me Up</button>
-            </form>
-        </div>
+            </div>
+            <p id="error-msg"></p>
+            <button type="submit" class="btn btn-primary">Sign Me Up</button>
+        </form>
     </div>
 {% endblock %}
 

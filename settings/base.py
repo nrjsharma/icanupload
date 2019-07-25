@@ -65,11 +65,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'icanupload.urls'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
 
 TEMPLATES = [
     {
