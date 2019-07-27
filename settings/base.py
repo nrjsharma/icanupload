@@ -118,11 +118,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# auth user model decleration
+###########################
+# AUTH
+###########################
+
+# auth user model override
 AUTH_USER_MODEL = 'authuser.IcanuploadUser'
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
+# Override Authentication method to login using username or email
+AUTHENTICATION_BACKENDS = ['authuser.authenticate.AuthenticateUsernameEmail']
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -134,9 +139,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 # for JS and CSS
 STATIC_URL = '/static/'

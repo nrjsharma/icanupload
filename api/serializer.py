@@ -25,14 +25,14 @@ class SignUpUserSerializer(ModelSerializer):
 
 
 class LoginSerializer(Serializer):
-    username = serializers.CharField()
+    username_email = serializers.CharField()
     password = serializers.CharField()
 
     def validate(self, validated_data):
-        username = validated_data.get('username', '')
-        password = validated_data.get('password', '')
-        if username and password:
-            user = authenticate(username=username, password=password)
+        username_email = validated_data.get('username_email', None)
+        password = validated_data.get('password', None)
+        if username_email and password:
+            user = authenticate(username_email=username_email, password=password)  # NOQA
             if user:
                 if user.is_active:
                     validated_data['user'] = user

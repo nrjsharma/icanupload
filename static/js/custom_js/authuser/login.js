@@ -47,14 +47,16 @@ $("#login-form").submit(function (event) {
             }, error: function (rs, e) {
                 console.error(rs.responseText)
                 console.error(rs.status)
-                if (rs.status == 404) {
-                    $('#error-msg').html("user not found");
-                } else {
                     var errors = JSON.parse(rs.responseText)
                     for (i in errors) {
                         $('#error-msg').html($('#error-msg').html() + errors[i] + '<br />');
+                        if(errors[i].indexOf('username') >= 0){
+                            document.getElementById("username").style.borderColor = "red";
+                        }
+                        if(errors[i].indexOf('password') >= 0){
+                            document.getElementById("password").style.borderColor = "red";
+                        }
                     }
-                }
                  $('#error-msg').css("display", "block");
             }, complete: function () {
                 console.log('request completed')
