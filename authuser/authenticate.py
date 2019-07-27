@@ -5,10 +5,10 @@ from rest_framework import exceptions
 
 
 class AuthenticateUsernameEmail(ModelBackend):
-    def authenticate(self, request, username_email=None, password=None, **kwargs):  # NOQA
+    def authenticate(self, request, username=None, password=None, **kwargs):  # NOQA
         UserModel = get_user_model()
         try:
-            user = UserModel.objects.get(Q(username__iexact=username_email) | Q(email__iexact=username_email))  # NOQA
+            user = UserModel.objects.get(Q(username__iexact=username) | Q(email__iexact=username))  # NOQA
         except UserModel.DoesNotExist:
             raise exceptions.NotFound(detail='username or email is incorrect')
         else:
