@@ -118,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# auth user model decleration
+AUTH_USER_MODEL = 'authuser.IcanuploadUser'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 

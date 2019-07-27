@@ -1,6 +1,6 @@
 from rest_framework import serializers, exceptions
 from rest_framework.serializers import ModelSerializer, Serializer
-from uploader.models import FileAddress, FileData
+from uploader.models import FileData, FileAddress
 from django.contrib.auth import get_user_model, authenticate
 
 
@@ -13,8 +13,7 @@ class SignUpUserSerializer(ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             email=validated_data['email'],
-            is_staff=False,
-            is_superuser=False,
+            is_admin=False,
         )
         user.set_password(validated_data['password'])
         user.save()

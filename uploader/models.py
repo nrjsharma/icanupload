@@ -1,14 +1,19 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from datetime import datetime, timedelta
+# import datetime as timezone
+from django.utils import timezone
+
+
+def calculate_delete_date():
+    return timezone.now() + timezone.timedelta(days=1)
 
 
 class FileData(models.Model):
     token = models.CharField(max_length=4, unique=True)
     password = models.CharField(max_length=255, null=True, blank=True)
-    upload_date = models.DateTimeField(default=datetime.now())
-    delete_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))  # NOQA
+    upload_date = models.DateTimeField(auto_now_add=True)  # Automatically set the field to now when the object is first created.  # NOQA
+    delete_date = models.DateTimeField(default=calculate_delete_date)  # NOQA
 
     def __str__(self):
         return '%s' % self.token

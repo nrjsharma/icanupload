@@ -6,7 +6,7 @@ from django.conf import settings
 from api import urls
 
 urlpatterns = [
-    path('superadmin/', admin.site.urls),
+    path('godmode/', admin.site.urls),
     url(r'^', include('dashboard.urls'), name='dashboard'),
     url(r'auth/', include('authuser.urls'), name='auth'),
     url(r'api/v1/', include(urls), name='api')
