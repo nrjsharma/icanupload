@@ -1,6 +1,7 @@
 # Django Import
 from django.contrib.auth import get_user_model, login, logout
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 # REST Framework Import
 from rest_framework.viewsets import ModelViewSet
@@ -125,10 +126,14 @@ class SavePasswordViewSet(ModelViewSet):
     def update(self, request, pk=None, *args, **kwargs):
         token = pk
         file_data = get_object_or_404(FileData, token=token)
+        delete_after = request.POST.get('delete_after', None)
+        password = request.POST.get('password', None)
         pk = file_data.pk  # NOQA
-        password = request.POST.get('password', '')
+        if delete_after:
+            delete_after = timezone.now() + timezone.timedelta(days=int(delete_after))  # NOQA
         data = {
-            'password': password
+            'password': password,
+            'delete_date': delete_after
         }
         _serializer = self.serializer_class(file_data, data)
         if _serializer.is_valid():

@@ -54,4 +54,4 @@ class FileAddressSerializer(ModelSerializer):
 class FileDataSerializers(ModelSerializer):
     class Meta:
         model = FileData
-        fields = ('password', )
+        fields = ('password', 'delete_date')
